@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div class="row">
+  <div class="offset-md-3 col-6 mt-3">
+    <ul class="nav nav-tabs" id="menuTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily-tab-pane" type="button" role="tab" aria-controls="daily-tab-pane" aria-selected="true">日次</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="monthly-tab" data-bs-toggle="tab" data-bs-target="#monthly-tab-pane" type="button" role="tab" aria-controls="monthly-tab-pane" aria-selected="false">月次</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="quarter-tab" data-bs-toggle="tab" data-bs-target="#quarter-tab-pane" type="button" role="tab" aria-controls="quarter-tab-pane" aria-selected="false">四半期</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="period-tab" data-bs-toggle="tab" data-bs-target="#period-tab-pane" type="button" role="tab" aria-controls="period-tab-pane" aria-selected="false">期間指定</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="daily-tab-pane" role="tabpanel" aria-labelledby="daily-tab" tabindex="0">
+        <div class="my-3">
+          日付で範囲指定をして取得する。。。
+        </div>
+        <form action="" onSubmit="event.preventDefault();return false;">
+          <label for="daily-catalogueId">catalogue id</label>
+            <input type="text" name="catalogueId" id="daily-catalogueId" value="" class="form-control "/>
+          </label>
+          <label for="daily-fromDate">from date</label>
+            <input type="text" name="fromDate" id="daily-fromDate" value="" class="form-control "/>
+          </label>
+          <label for="daily-toDate">to date</label>
+            <input type="text" name="toDate" id="daily-toDate" value="" class="form-control "/>
+          </label>
+
+          <button type="button" name="submit" id="submit-daily" value="submit" class="btn btn-primary mt-3">送信</button>
+        </form>
+      </div>
+
+      <div class="tab-pane fade" id="monthly-tab-pane" role="tabpanel" aria-labelledby="monthly-tab" tabindex="0">
+        <form action="" onSubmit="event.preventDefault();return false;">
+          <div class="my-3">
+            年月で範囲指定をして、指定された。。。
+          </div>
+          <label for="monthly-catalogueId">catalogue id</label>
+            <input type="text" name="catalogueId" id="monthly-catalogueId" value="" class="form-control "/>
+          </label>
+          <label for="monthly-fromDate">from date</label>
+            <input type="text" name="fromDate" id="monthly-fromDate" value="" class="form-control "/>
+          </label>
+          <label for="monthly-toDate">to date</label>
+            <input type="text" name="toDate" id="monthly-toDate" value="" class="form-control "/>
+          </label>
+          <button type="button" name="submit" id="submit-monthly" value="submit" class="btn btn-primary mt-3">送信</button>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="quarter-tab-pane" role="tabpanel" aria-labelledby="quarter-tab" tabindex="0">
+        <form action="">
+          quarter
+          <button type="button" name="submit" id="submit-quarter" value="submit" class="btn btn-primary mt-3">送信</button>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="period-tab-pane" role="tabpanel" aria-labelledby="period-tab" tabindex="0">
+        <form action="">
+          period
+          <button type="button" name="submit" id="submit-period" value="submit" class="btn btn-primary mt-3">送信</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+
+  const buttonDaily = document.getElementById('submit-daily');
+  if (buttonDaily) {
+    buttonDaily.addEventListener('click', () => {
+      const catalogueId = document.getElementById('daily-catalogueId').value;
+      const fromDate = document.getElementById('daily-fromDate').value;
+      const toDate = document.getElementById('daily-toDate').value;
+      const path = '/data/d/' + catalogueId + '/' + fromDate + '/' + toDate;
+      location.href = path;
+    });
+  }
+
+  const buttonMonthly = document.getElementById('submit-monthly');
+  if (buttonMonthly) {
+    buttonMonthly.addEventListener('click', () => {
+      const catalogueId = document.getElementById('monthly-catalogueId').value;
+      const fromDate = document.getElementById('monthly-fromDate').value;
+      const toDate = document.getElementById('monthly-toDate').value;
+      const path = '/data/m/' + catalogueId + '/' + fromDate + '/' + toDate;
+      location.href = path;
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
